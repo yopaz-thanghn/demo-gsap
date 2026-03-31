@@ -9,7 +9,7 @@ gsap.registerPlugin(Observer)
 onMounted(() => {
   gsap.utils.toArray('.sector').forEach((sector) => {
     ScrollTrigger.create({
-      trigger: sector,
+      trigger: sector as HTMLElement,
       pin: true,
       pinSpacing: false,
       start: 'top top',

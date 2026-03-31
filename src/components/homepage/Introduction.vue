@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { storeToRefs } from 'pinia'
-import { jobImages } from './jobImages'
+// import { storeToRefs } from 'pinia'
+import { jobImages } from '../../constants/jobImages'
 import { SplitText } from 'gsap/all'
 import { gsap } from 'gsap'
-import { useGsapStore } from '@/stores/useGsapStore'
+// import { useGsapStore } from '@/stores/useGsapStore'
 
-const { smoother } = storeToRefs(useGsapStore())
+// const { smoother } = storeToRefs(useGsapStore())
 
 onMounted(() => {
   const split = SplitText.create('.section1-title', {

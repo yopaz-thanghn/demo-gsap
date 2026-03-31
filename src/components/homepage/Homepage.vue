@@ -8,7 +8,7 @@ import Sectors from './Sectors.vue'
 import IntroductionVideo from './IntroductionVideo.vue'
 import Introduction from './Introduction.vue'
 import { useGsapStore } from '@/stores/useGsapStore'
-import Projects from './Projects.vue'
+import LogoAnimation from './LogoAnimation.vue'
 
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother)
 
@@ -30,11 +30,11 @@ onMounted(() => {
 <template>
   <div id="homepage" class="bg-[#FAFAFA] w-screen mt-20">
     <div id="homepage-content">
-      <!-- <Introduction />
+      <Introduction />
       <IntroductionVideo />
-      <Advantages /> -->
-      <!-- <Sectors /> -->
-      <Projects />
+      <LogoAnimation />
+      <Advantages />
+      <Sectors />
     </div>
   </div>
 </template>
