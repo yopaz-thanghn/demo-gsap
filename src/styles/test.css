@@ -1,6 +1,0 @@
-.word,
-.line,
-.char {
-  outline: 1px dashed #ccc;
-  border-radius: 10px;
-}

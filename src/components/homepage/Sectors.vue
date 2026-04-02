@@ -15,24 +15,14 @@ onMounted(() => {
       start: 'top top',
       anticipatePin: 1,
       scrub: 0.05,
+      // endTrigger: '.project-section',
     })
   })
-
-  // Observer.create({
-  //   target: 'window',
-  //   type: 'wheel,touch,scroll,pointer',
-  //   onPress: () => {
-  //     console.log('on press');
-  //   },
-  //   onChange: (self) => {
-  //     console.log(self.deltaY, self.velocityY);
-  //   }
-  // })
 })
 </script>
 
 <template>
-  <section class="sector-container w-full">
+  <section class="sector-container w-full min-h-screen">
     <div class="sector-content">
       <h1 class="font-bold text-2xl text-center mb-10">LĨNH VỰC PHÁT TRIỂN</h1>
       <div
