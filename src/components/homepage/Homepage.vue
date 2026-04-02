@@ -38,7 +38,6 @@ onMounted(() => {
       <Sectors />
       <Projects />
       <ClientFeedback />
-      <!-- <div class="h-screen w-full"></div> -->
     </div>
   </div>
 </template>

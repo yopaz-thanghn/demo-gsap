@@ -4,31 +4,7 @@ import { gsap } from 'gsap'
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  gsap.utils.toArray('.project-list-1-item').forEach((item) => {
-    const el = item as HTMLElement
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 80%',
-        scrub: 0.5,
-      },
-      scale: 1.3,
-    })
-  })
-
-  gsap.utils.toArray('.project-list-2-item').forEach((item) => {
-    const el = item as HTMLElement
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 80%',
-        scrub: 0.5,
-      },
-      scale: 1.3,
-    })
-  })
-
-  gsap.utils.toArray('.project-list-3-item').forEach((item) => {
+  gsap.utils.toArray('.project-list-item').forEach((item) => {
     const el = item as HTMLElement
     gsap.to(el, {
       scrollTrigger: {
@@ -43,13 +19,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="flex items-center justify-center h-screen px-10 bg-blue-200 project-section">
+  <section class="flex items-center justify-center h-screen px-10 bg-blue-200">
     <div class="flex-1 flex flex-col gap-y-10 project-list-1">
       <div v-for="item in projectList1" :key="item.id" class="flex items-center justify-center">
         <img
           :src="item.img"
           alt="list 1"
-          class="h-20 w-36 object-cover project-list-1-item scale-[0.5]"
+          class="h-20 w-36 object-cover project-list-item scale-[0.5]"
         />
       </div>
     </div>
@@ -58,7 +34,7 @@ onMounted(() => {
         <img
           :src="item.img"
           alt="list 2"
-          class="h-20 w-36 object-cover project-list-2-item scale-[0.5]"
+          class="h-20 w-36 object-cover project-list-item scale-[0.5]"
         />
       </div>
     </div>
@@ -67,7 +43,7 @@ onMounted(() => {
         <img
           :src="item.img"
           alt="list 2"
-          class="h-20 w-36 object-cover project-list-3-item scale-[0.5]"
+          class="h-20 w-36 object-cover project-list-item scale-[0.5]"
         />
       </div>
     </div>

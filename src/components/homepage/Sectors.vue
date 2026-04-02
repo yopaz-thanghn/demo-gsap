@@ -7,15 +7,16 @@ import { onMounted } from 'vue'
 gsap.registerPlugin(Observer)
 
 onMounted(() => {
-  gsap.utils.toArray('.sector').forEach((sector) => {
+  const sectors = gsap.utils.toArray('.sector')
+  const isLastIndex = sectors.length - 1
+  sectors.forEach((sector, index) => {
     ScrollTrigger.create({
       trigger: sector as HTMLElement,
-      pin: true,
+      pin: index !== isLastIndex,
       pinSpacing: false,
       start: 'top top',
       anticipatePin: 1,
       scrub: 0.05,
-      // endTrigger: '.project-section',
     })
   })
 })

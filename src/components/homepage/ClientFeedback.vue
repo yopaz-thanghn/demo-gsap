@@ -27,121 +27,113 @@ onMounted(() => {
       trigger: container,
       start: 'center 60%',
       // end: 'center 60%',
-      scrub: 1,
+      scrub: 5,
       pin: true,
     },
   })
   tl.to(clientCards[0] as HTMLElement, {
     backgroundColor: '#fff',
-    duration: 0.3,
     zIndex: 10,
+    ease: 'power1.in',
   })
     .to(cardContents[0] as HTMLElement, {
-      display: 'block',
+      opacity: 1,
+      ease: 'power1.in',
     })
     .fromTo(
       clientCards[1] as HTMLElement,
       {
         x: -containerWidth / 2,
-        ease: 'power1.inOut',
+        ease: 'power1.in',
         opacity: 0,
-        duration: 0.8,
       },
       {
         backgroundColor: '#fff',
         x: 0,
         opacity: 1,
-        ease: 'power1.inOut',
-        duration: 0.8,
+        ease: 'power1.in',
         zIndex: 10,
       },
     )
     .to(cardContents[1] as HTMLElement, {
-      display: 'block',
+      opacity: 1,
+      ease: 'power1.in',
     })
     .fromTo(
       clientCards[2] as HTMLElement,
       {
         y: -containerHeight / 3,
-        ease: 'power1.inOut',
+        ease: 'power1.in',
         opacity: 0,
-        duration: 0.8,
       },
       {
         backgroundColor: '#fff',
         y: 0,
         opacity: 1,
-        ease: 'power1.inOut',
-        duration: 0.8,
+        ease: 'power1.in',
         zIndex: 10,
       },
     )
     .to(cardContents[2] as HTMLElement, {
-      display: 'block',
+      opacity: 1,
     })
     .fromTo(
       clientCards[3] as HTMLElement,
       {
         y: -containerHeight / 3,
         x: -containerWidth / 2,
-        ease: 'power1.inOut',
+        ease: 'power1.in',
         opacity: 0,
-        duration: 1,
       },
       {
         backgroundColor: '#fff',
         y: 0,
         x: 0,
         opacity: 1,
-        ease: 'power1.inOut',
-        duration: 1,
+        ease: 'power1.in',
         zIndex: 10,
       },
     )
     .to(cardContents[3] as HTMLElement, {
-      display: 'block',
+      opacity: 1,
     })
     .fromTo(
       clientCards[4] as HTMLElement,
       {
         y: -containerHeight / 2,
-        ease: 'power1.inOut',
+        ease: 'power1.in',
         opacity: 0,
-        duration: 1,
       },
       {
         backgroundColor: '#fff',
         y: 0,
         opacity: 1,
-        ease: 'power1.inOut',
-        duration: 1,
+        ease: 'power1.in',
         zIndex: 10,
       },
     )
     .to(cardContents[4] as HTMLElement, {
-      display: 'block',
+      opacity: 1,
     })
     .fromTo(
       clientCards[5] as HTMLElement,
       {
         y: -containerHeight / 2,
         x: -containerWidth / 2,
-        ease: 'power1.inOut',
+        ease: 'power1.in',
         opacity: 0,
-        duration: 1.4,
       },
       {
         backgroundColor: '#fff',
         y: 0,
         x: 0,
         opacity: 1,
-        ease: 'power1.inOut',
+        ease: 'power1.in',
         zIndex: 10,
-        duration: 1.4,
       },
     )
     .to(cardContents[5] as HTMLElement, {
-      display: 'block',
+      opacity: 1,
     })
 })
 </script>
@@ -154,13 +146,13 @@ onMounted(() => {
         <div
           v-for="item in clientFeedbacks"
           :key="item.id"
-          class="flex gap-x-5 flex-1 bg-white/30 rounded-lg client-card shadow-xl"
+          class="flex gap-x-5 flex-1 bg-white/30 rounded-lg client-card shadow-xl will-change-transform"
         >
           <img :src="item.avatar" :alt="item.name" class="w-32 h-40 rounded-lg" />
           <div class="flex flex-col">
             <h3 class="font-semibold text-xl">{{ item.name }}</h3>
             <h4 class="italic text-base">{{ item.position }} - {{ item.company }}</h4>
-            <p class="text-sm hidden client-card-content">{{ item.content }}</p>
+            <p class="text-sm opacity-0 client-card-content">{{ item.content }}</p>
           </div>
         </div>
       </div>
