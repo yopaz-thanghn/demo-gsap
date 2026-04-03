@@ -5,8 +5,18 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Homepage',
-      component: () => import('@/components/homepage/Homepage.vue'),
+      children: [
+        {
+          path: '',
+          name: 'homepage',
+          component: () => import('@/pages/HomePage.vue'),
+        },
+        {
+          path: 'animation',
+          name: 'animation-page',
+          component: () => import('@/pages/AnimationPage.vue'),
+        },
+      ],
     },
   ],
 })

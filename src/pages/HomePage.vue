@@ -3,14 +3,14 @@ import { onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollSmoother, ScrollTrigger, SplitText, Flip, CSSPlugin } from 'gsap/all'
 
-import Advantages from './Advantages.vue'
-import Sectors from './Sectors.vue'
-import IntroductionVideo from './IntroductionVideo.vue'
-import Introduction from './Introduction.vue'
+import Advantages from '@/components/homepage/Advantages.vue'
+import Sectors from '@/components/homepage/Sectors.vue'
+import IntroductionVideo from '@/components/homepage/IntroductionVideo.vue'
+import Introduction from '@/components/homepage/Introduction.vue'
 import { useGsapStore } from '@/stores/useGsapStore'
-import LogoAnimation from './LogoAnimation.vue'
-import Projects from './Projects.vue'
-import ClientFeedback from './ClientFeedback.vue'
+import LogoAnimation from '@/components/homepage/LogoAnimation.vue'
+import Projects from '@/components/homepage/Projects.vue'
+import ClientFeedback from '@/components/homepage/ClientFeedback.vue'
 
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother, Flip, CSSPlugin)
 const { setSmoother } = useGsapStore()
