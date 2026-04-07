@@ -10,7 +10,13 @@ import carImg9 from '@/assets/animation-page/car-9.jpg'
 import carImg10 from '@/assets/animation-page/car-10.jpg'
 import carImg11 from '@/assets/animation-page/car-11.jpg'
 
-export const imageGallery = [
+export type ImageGalleryItem = {
+  id: number
+  img: string
+  title: string
+}
+
+export const imageGallery: ImageGalleryItem[] = [
   { id: 1, img: carImg1, title: 'Car 1' },
   { id: 2, img: carImg2, title: 'Car 2' },
   { id: 3, img: carImg3, title: 'Car 3' },
@@ -22,12 +28,4 @@ export const imageGallery = [
   { id: 9, img: carImg9, title: 'Car 9' },
   { id: 10, img: carImg10, title: 'Car 10' },
   { id: 11, img: carImg11, title: 'Car 11' },
-  // { id: 5, img: carImg5, title: 'Car 5' },
-  // { id: 6, img: carImg6, title: 'Car 6' },
-  // { id: 7, img: carImg7, title: 'Car 7' },
-  // { id: 8, img: carImg8, title: 'Car 8' },
-  // { id: 1, img: carImg1, title: 'Car 1' },
-  // { id: 2, img: carImg2, title: 'Car 2' },
-  // { id: 8, img: carImg8, title: 'Car 8' },
-  // { id: 9, img: carImg9, title: 'Car 9' },
 ]

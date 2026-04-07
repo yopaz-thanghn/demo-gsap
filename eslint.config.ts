@@ -26,4 +26,9 @@ export default defineConfigWithVueTs(
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 
   skipFormatting,
+  {
+    rules: {
+      'no-console': 'warn',
+    },
+  },
 )
