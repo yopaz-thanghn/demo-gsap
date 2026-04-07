@@ -5,6 +5,9 @@ import { onMounted, ref, watch } from 'vue'
 import 'swiper/css/effect-coverflow'
 import { imageGallery } from '@/constants/imageGallery'
 import { twJoin } from 'tailwind-merge'
+import { gsap } from 'gsap'
+import swipeIcon from '@/assets/icons/rotate.png'
+import { ScrollTrigger, SplitText } from 'gsap/all'
 
 const sliderRef = ref<HTMLDivElement | null>(null)
 
@@ -35,6 +38,46 @@ watch(isMouseDown, (value) => {
   slider.style.transform = `perspective(1000px) rotateX(-10deg) rotateY(${endYDeg.value}deg)`
 })
 
+const swipeIconAnimation = () => {
+  const swipeIcon = document.querySelector<HTMLImageElement>('.swipe-icon')
+  if (!swipeIcon) return
+  gsap.to(swipeIcon, {
+    duration: 1,
+    repeat: -1,
+    ease: 'power2.inOut',
+    rotateZ: -20,
+  })
+}
+
+const animateDescription = () => {
+  const text = SplitText.create('.store-description', {
+    type: 'chars, words',
+  })
+  const tl = gsap.timeline()
+  ScrollTrigger.create({
+    trigger: text.words,
+    start: 'top 80%',
+    scrub: 1,
+    onEnter: () => {
+      tl.from(text.words, {
+        opacity: 0,
+        y: 50,
+        stagger: 0.01,
+      })
+        .from('.description-left', {
+          duration: 0.5,
+          opacity: 0,
+          xPercent: -100,
+        })
+        .from('.description-right', {
+          duration: 0.5,
+          opacity: 0,
+          xPercent: 100,
+        })
+    },
+  })
+}
+
 onMounted(() => {
   if (!sliderRef.value) return
   init(sliderRef.value)
@@ -44,12 +87,14 @@ onMounted(() => {
       numberOfImgLoaded.value = numberOfImgLoaded.value + 1
     })
   })
+  swipeIconAnimation()
+  animateDescription()
 })
 </script>
 
 <template>
-  <div class="banner">
-    <div ref="sliderRef" class="slider" :style="`--quantity: ${imageGallery.length}`">
+  <div class="gallery-container h-[calc(100vh-64px)] pt-16">
+    <div ref="sliderRef" class="slider mt-10" :style="`--quantity: ${imageGallery.length}`">
       <div
         v-for="(item, index) in imageGallery"
         :key="item.id"
@@ -59,11 +104,37 @@ onMounted(() => {
         <img :src="item.img" :alt="item.title" />
       </div>
     </div>
+    <div class="relative -top-20 flex items-center justify-center w-full select-none">
+      <span class="text-lg text-blue-400 mr-5">Swipe Image</span>
+      <img :src="swipeIcon" alt="swipe icon" class="size-10 swipe-icon" />
+    </div>
+    <div class="select-none flex flex-col justify-center w-full mt-5 px-20">
+      <h1 class="font-bold text-3xl">Power you can feel - Luxury you deserve</h1>
+      <p class="font-normal text-base mt-5 text-[#444] store-description">
+        Welcome to a world where performance meets perfection. Our supercar showroom is more than
+        just a store—it’s a destination for those who crave speed, luxury, and cutting-edge
+        engineering. From sleek, aerodynamic designs to roaring engines that command attention,
+        every vehicle in our collection is a masterpiece crafted for true enthusiasts.
+      </p>
+      <div class="flex items-start justify-between mt-10 gap-x-40 text-[#444]">
+        <p class="flex-1 text-justify description-left">
+          We offer an exclusive lineup of the world’s most prestigious supercars, featuring iconic
+          brands known for innovation and excellence. Whether you're drawn to the raw power of
+          track-focused machines or the refined elegance of high-performance grand tourers, our
+          curated selection delivers an unforgettable experience.
+        </p>
+        <p class="flex-1 text-justify description-right">
+          Step inside and immerse yourself in a space designed to reflect the spirit of these
+          extraordinary vehicles. Our expert team is here to guide you through every detail,
+          ensuring a personalized journey from admiration to ownership.
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.banner {
+.gallery-container {
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -71,12 +142,11 @@ onMounted(() => {
   position: relative;
 }
 
-.banner .slider {
-  position: absolute;
+.gallery-container .slider {
+  position: relative;
   z-index: 10;
-  width: 200px;
-  height: 250px;
-  top: 10%;
+  width: 240px;
+  height: 320px;
   left: calc(50% - 100px);
   transform-style: preserve-3d;
   /* animation: autoRun 20s linear infinite; */
@@ -94,7 +164,7 @@ onMounted(() => {
   }
 }
 
-.banner .slider .item {
+.gallery-container .slider .item {
   position: absolute;
   inset: 0;
   transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(-50vw);
@@ -104,7 +174,7 @@ onMounted(() => {
   user-select: none;
 }
 
-.banner .slider .item img {
+.gallery-container .slider .item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
