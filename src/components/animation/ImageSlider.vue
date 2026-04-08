@@ -2,15 +2,21 @@
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import type { Swiper as SwiperType } from 'swiper'
 import { Flip } from 'gsap/all'
-import { onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, useTemplateRef } from 'vue'
 import { imageGallery } from '@/constants/imageGallery'
 import leftArrowIcon from '@/assets/icons/left-arrow.png'
 import rightArrowIcon from '@/assets/icons/right-arrow.png'
 
 const swiperRef = ref<SwiperType | null>(null)
 const activeSlideIndex = ref<number>(0)
+const disabledButton = ref<boolean>(false)
+const countImgLoaded = ref<number>(0)
 
 const mainBackgroundRef = useTemplateRef<HTMLDivElement>('main-background')
+
+const isLoadedEnoughImgs = computed(() => {
+  return countImgLoaded.value === imageGallery.length
+})
 
 const onInit = (swiper: SwiperType) => {
   swiperRef.value = swiper
@@ -21,12 +27,13 @@ const onSlideChange = (swiper: SwiperType) => {
 }
 
 const handleBackslide = async () => {
+  if (disabledButton.value) return
+  disabledButton.value = true
   const swiper = swiperRef.value
   const mainBg = mainBackgroundRef.value
   if (!swiper || !mainBg) return
   swiper.slidePrev()
   const previousIndex = activeSlideIndex.value
-
   const imgChild = mainBg.querySelector<HTMLImageElement>(`[data-index="${previousIndex}"]`)
   if (!imgChild) return
   const currentSlide = document.querySelector<HTMLDivElement>(
@@ -43,11 +50,16 @@ const handleBackslide = async () => {
     ease: 'power1.inOut',
     absolute: true,
     scale: true,
+    onComplete: () => {
+      disabledButton.value = false
+    },
   })
   setBgImageStateList('prev', previousIndex, imgChild)
 }
 
 const handleNextSlide = async () => {
+  if (disabledButton.value) return
+  disabledButton.value = true
   const swiper = swiperRef.value
   const mainBackground = mainBackgroundRef.value
   if (!swiper || !mainBackground) return
@@ -70,6 +82,7 @@ const handleNextSlide = async () => {
   swiper.slideNext()
   swiper.on('slideNextTransitionEnd', () => {
     currentSlide?.appendChild(copyImg)
+    disabledButton.value = false
     swiper.off('slideNextTransitionEnd')
   })
 }
@@ -100,6 +113,9 @@ onMounted(() => {
   if (!slides || !mainbg) return
   slides.forEach((slide) => {
     const imgEl = slide.querySelector('img') as HTMLImageElement
+    imgEl.addEventListener('load', () => {
+      countImgLoaded.value += 1
+    })
     const copyImg = imgEl.cloneNode(true)
     mainbg.appendChild(copyImg)
   })
@@ -111,7 +127,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="h-screen w-full">
+  <div class="h-screen w-full relative pt-16">
     <div class="flex items-center justify-between gap-x-5 relative z-10">
       <div
         @click="handleBackslide"
@@ -133,7 +149,7 @@ onBeforeUnmount(() => {
         <swiper-slide
           v-for="(item, index) in imageGallery"
           :key="item.id"
-          :lazy="true"
+          :lazy="false"
           class="slider-item relative"
         >
           <img :src="item.img" :alt="item.title" :data-index="index" />
@@ -147,7 +163,11 @@ onBeforeUnmount(() => {
         <img :src="rightArrowIcon" alt="right-arrow-icon" class="size-full block" />
       </div>
     </div>
-    <div ref="main-background" class="absolute size-full z-0 top-0 left-0 main-background"></div>
+    <div
+      v-show="isLoadedEnoughImgs"
+      ref="main-background"
+      class="absolute size-full z-0 top-0 left-0 main-background"
+    ></div>
   </div>
 </template>
 

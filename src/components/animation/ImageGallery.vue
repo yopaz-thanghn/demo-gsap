@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import '@/styles/image-gallery.css'
 import { useCalculateDragDistance } from '@/utils/calculateDragDistance'
 import { onMounted, ref, watch } from 'vue'
 import 'swiper/css/effect-coverflow'
@@ -54,25 +53,31 @@ const animateDescription = () => {
     type: 'chars, words',
   })
   const tl = gsap.timeline()
+
+  gsap.set(text.words, { opacity: 0, y: 50 })
+  gsap.set('.description-left', { opacity: 0, xPercent: -100 })
+  gsap.set('.description-right', { opacity: 0, xPercent: 100 })
+
   ScrollTrigger.create({
     trigger: text.words,
     start: 'top 80%',
     scrub: 1,
+    toggleActions: 'restart pause reverse pause',
     onEnter: () => {
-      tl.from(text.words, {
-        opacity: 0,
-        y: 50,
+      tl.to(text.words, {
+        opacity: 1,
+        y: 0,
         stagger: 0.01,
       })
-        .from('.description-left', {
+        .to('.description-left', {
           duration: 0.5,
-          opacity: 0,
-          xPercent: -100,
+          opacity: 1,
+          xPercent: 0,
         })
-        .from('.description-right', {
+        .to('.description-right', {
           duration: 0.5,
-          opacity: 0,
-          xPercent: 100,
+          opacity: 1,
+          xPercent: 0,
         })
     },
   })
@@ -93,8 +98,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="gallery-container h-[calc(100vh-64px)] pt-16">
-    <div ref="sliderRef" class="slider mt-10" :style="`--quantity: ${imageGallery.length}`">
+  <div class="gallery-container h-[calc(100vh-64px)] pt-16 bg-black">
+    <div
+      ref="sliderRef"
+      class="slider mt-10 select-none"
+      :style="`--quantity: ${imageGallery.length}`"
+    >
       <div
         v-for="(item, index) in imageGallery"
         :key="item.id"
@@ -104,19 +113,21 @@ onMounted(() => {
         <img :src="item.img" :alt="item.title" />
       </div>
     </div>
-    <div class="relative -top-20 flex items-center justify-center w-full select-none">
+    <div
+      class="relative -top-20 flex items-center justify-center select-none bg-white w-fit m-auto px-3"
+    >
       <span class="text-lg text-blue-400 mr-5">Swipe Image</span>
       <img :src="swipeIcon" alt="swipe icon" class="size-10 swipe-icon" />
     </div>
     <div class="select-none flex flex-col justify-center w-full mt-5 px-20">
-      <h1 class="font-bold text-3xl">Power you can feel - Luxury you deserve</h1>
-      <p class="font-normal text-base mt-5 text-[#444] store-description">
+      <h1 class="font-bold text-3xl text-white">Power you can feel - Luxury you deserve</h1>
+      <p class="font-normal text-base mt-5 text-white/70 store-description">
         Welcome to a world where performance meets perfection. Our supercar showroom is more than
         just a store—it’s a destination for those who crave speed, luxury, and cutting-edge
         engineering. From sleek, aerodynamic designs to roaring engines that command attention,
         every vehicle in our collection is a masterpiece crafted for true enthusiasts.
       </p>
-      <div class="flex items-start justify-between mt-10 gap-x-40 text-[#444]">
+      <div class="flex items-start justify-between mt-10 gap-x-40 text-white/70">
         <p class="flex-1 text-justify description-left">
           We offer an exclusive lineup of the world’s most prestigious supercars, featuring iconic
           brands known for innovation and excellence. Whether you're drawn to the raw power of
