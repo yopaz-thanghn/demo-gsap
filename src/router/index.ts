@@ -12,9 +12,14 @@ const router = createRouter({
           component: () => import('@/pages/HomePage.vue'),
         },
         {
-          path: 'animation',
-          name: 'animation-page',
-          component: () => import('@/pages/AnimationPage.vue'),
+          path: 'cars',
+          name: 'car-page',
+          component: () => import('@/pages/CarPage.vue'),
+        },
+        {
+          path: 'nature',
+          name: 'nature-page',
+          component: () => import('@/pages/NaturePage.vue'),
         },
       ],
     },

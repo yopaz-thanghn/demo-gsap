@@ -48,6 +48,7 @@ const runAnimation = async () => {
       scrub: 1,
       pin: true,
       anticipatePin: 1,
+      pinSpacing: false,
     },
   })
 
@@ -83,7 +84,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-[calc(100vh-64px)] w-full pt-16 relative">
+  <div class="min-h-[calc(100vh-64px)] w-full pt-16 relative overflow-hidden">
     <div class="absolute inset-0 size-full z-[-1]">
       <img :src="background" alt="background" class="size-full" />
     </div>

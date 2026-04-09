@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ImageGallery from '@/components/animation/ImageGallery.vue'
-import ImageSlider from '@/components/animation/ImageSlider.vue'
+import ImageGallery from '@/components/car/ImageGallery.vue'
+import ImageSlider from '@/components/car/ImageSlider.vue'
 import { gsap } from 'gsap'
 import {
   InertiaPlugin,
@@ -12,9 +12,9 @@ import {
   ScrollSmoother,
 } from 'gsap/all'
 import 'swiper/css'
-import NewestCar from '@/components/animation/NewestCar.vue'
+import NewestCar from '@/components/car/NewestCar.vue'
 import { onMounted } from 'vue'
-import CarTimeline from '@/components/animation/CarTimeline.vue'
+import CarTimeline from '@/components/car/CarTimeline.vue'
 
 gsap.registerPlugin(
   InertiaPlugin,
