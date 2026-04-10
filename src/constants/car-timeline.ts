@@ -1,7 +1,7 @@
-import car1 from '@/assets/animation-page/car-11.jpg'
-import car2 from '@/assets/animation-page/car-8.jpg'
-import car3 from '@/assets/animation-page/car-2.jpg'
-import car4 from '@/assets/animation-page/car-6.jpg'
+import car1 from '@/assets/car-page/car-11.jpg'
+import car2 from '@/assets/car-page/car-8.jpg'
+import car3 from '@/assets/car-page/car-2.jpg'
+import car4 from '@/assets/car-page/car-6.jpg'
 
 export const carTimeline = [
   {

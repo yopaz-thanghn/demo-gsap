@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { headerList } from '@/constants/header'
 // import logo from '@/assets/images/yopaz-logo.svg'
-import carLogo from '@/assets/animation-page/car-logo.jpg'
+// import carLogo from '@/assets/car-page/car-logo.jpg'
 import mailIcon from '@/assets/icons/mail.png'
+import natureLogo from '@/assets/nature/nature-logo.jpg'
 
 defineOptions({
   inheritAttrs: false,
@@ -15,7 +16,7 @@ defineOptions({
   >
     <div>
       <RouterLink to="/" class="block">
-        <img :src="carLogo" alt="logo-yopaz" class="h-12 w-24 object-cover" />
+        <img :src="natureLogo" alt="logo-yopaz" class="h-12 w-24 object-cover" />
       </RouterLink>
     </div>
     <ul class="flex items-center gap-x-10">

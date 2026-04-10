@@ -1,7 +1,7 @@
-import carPowerIcon from '@/assets/animation-page/fast.png'
-import carControlIcon from '@/assets/animation-page/steering-wheel.png'
-import carEngineIcon from '@/assets/animation-page/car-engine.png'
-import carDesignIcon from '@/assets/animation-page/vehicle.png'
+import carPowerIcon from '@/assets/car-page/fast.png'
+import carControlIcon from '@/assets/car-page/steering-wheel.png'
+import carEngineIcon from '@/assets/car-page/car-engine.png'
+import carDesignIcon from '@/assets/car-page/vehicle.png'
 
 export const carFeatures = [
   {

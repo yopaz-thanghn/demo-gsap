@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import { ScrollTrigger, SplitText } from 'gsap/all'
+import { SplitText } from 'gsap/all'
 import { onMounted } from 'vue'
 
 const zoomText = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.wrapper-bg',
-      scrub: 1,
       start: 'center center',
+      scrub: 1,
       invalidateOnRefresh: true,
       pin: true,
-      markers: true,
     },
   })
 
@@ -25,23 +24,25 @@ const zoomText = () => {
 
   tl.to('.main-word', {
     scale: 100,
-    duration: 2,
     ease: 'power1.inOut',
+    duration: 50,
   })
-    .to('.word-wrapper', {
-      backgroundClip: 'content-box',
+    .from('.word-wrapper', {
+      backgroundOrigin: 'content-box',
       ease: 'power1.inOut',
-      duration: 1,
+      duration: 10,
     })
     .from(contentTitle.chars, {
       autoAlpha: 0,
-      stagger: 0.1,
+      stagger: 0.5,
       yPercent: -100,
+      duration: 10,
     })
     .from(contentDescription.words, {
       autoAlpha: 0,
-      stagger: 0.1,
+      stagger: 0.5,
       yPercent: 'random(-100, 100)',
+      duration: 10,
     })
 }
 
@@ -71,7 +72,6 @@ onMounted(() => {
     </div>
     <div class="flex items-center justify-center h-full absolute inset-0"></div>
   </section>
-  <!-- <div class="h-screen w-full"></div> -->
 </template>
 
 <style scoped>
