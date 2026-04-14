@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue'
+import { gsap } from 'gsap'
 
 const spinBtnRef = useTemplateRef<HTMLButtonElement>('spint-btn')
 const wheelRef = useTemplateRef<HTMLDivElement>('wheel')
 
 const calculateDeg = () => {
   const randomNumber = Math.floor(Math.random() * 360) + 1
-  return randomNumber + 360 * 5
+  return randomNumber + 360 * 10
 }
 const rotationValue = ref<number>(calculateDeg())
 
@@ -14,7 +15,25 @@ const handleSpin = () => {
   const spinBtn = spinBtnRef.value
   const wheel = wheelRef.value
   if (!spinBtn || !wheel) return
-  wheel.style.transform = `rotate(${rotationValue.value}deg)`
+  gsap.to(wheel, {
+    rotate: rotationValue.value,
+    ease: 'power4.out',
+    duration: 8,
+    onComplete: () => {
+      let selectedBox: HTMLDivElement | undefined
+      let minTop = 99999
+      const numberBoxes = document.querySelectorAll<HTMLDivElement>('.number')
+      numberBoxes.forEach((box) => {
+        const bouding = box.getBoundingClientRect()
+        if (bouding.top < minTop) {
+          minTop = bouding.top
+          selectedBox = box
+        }
+      })
+      // eslint-disable-next-line no-console
+      console.log(selectedBox?.innerText)
+    },
+  })
   rotationValue.value += calculateDeg()
 }
 </script>
@@ -23,7 +42,7 @@ const handleSpin = () => {
   <section>
     <div class="container">
       <button ref="spint-btn" class="spint-btn" @click="handleSpin">spin</button>
-      <div ref="wheel" class="wheel">
+      <div ref="wheel" class="wheel" style="--total: 11">
         <div class="number" style="--i: 1; --clr: #ff6b6b">
           <span>100</span>
         </div>
@@ -51,6 +70,12 @@ const handleSpin = () => {
         <div class="number" style="--i: 9; --clr: #ff9f1c">
           <span>8</span>
         </div>
+        <div class="number" style="--i: 10; --clr: #ff0080">
+          <span>20</span>
+        </div>
+        <div class="number" style="--i: 11; --clr: #00ff85">
+          <span>60</span>
+        </div>
       </div>
     </div>
   </section>
@@ -62,7 +87,7 @@ section {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: #333;
 }
 
@@ -119,17 +144,19 @@ section {
     0 0 0 18px #111;
 
   overflow: hidden;
-  transition: transform 5s ease-in-out;
+  will-change: transform;
 }
 
 .container .wheel .number {
   position: absolute;
-  width: 50%;
-  height: 50%;
+  width: 200px;
+  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
   background: var(--clr);
   transform-origin: bottom right;
-  transform: rotate(calc(45deg * var(--i)));
-  clip-path: polygon(0 0, 60% 0, 100% 100%, 0 60%);
+  transform: rotate(calc((360 / var(--total) * 1deg) * var(--i)));
+  clip-path: polygon(0 0, 47% 0, 100% 100%, 0 44%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,7 +165,7 @@ section {
 
 .container .wheel .number span {
   position: relative;
-  transform: rotate(45deg);
+  transform: rotate(calc(360 / var(--total) * 1deg));
   font-size: 1.5em;
   font-weight: 700;
   color: white;

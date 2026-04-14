@@ -30,7 +30,7 @@ const zoomText = () => {
     .from('.word-wrapper', {
       backgroundOrigin: 'content-box',
       ease: 'power1.inOut',
-      duration: 10,
+      duration: 2,
     })
     .from(contentTitle.chars, {
       autoAlpha: 0,
@@ -54,10 +54,7 @@ onMounted(() => {
 <template>
   <section class="h-screen w-full relative wrapper-bg">
     <div
-      :class="
-        'absolute inset-0 h-full w-full z-10 bg-clip-text flex items-center justify-center word-wrapper' +
-        ` bg-[url(/mountain.jpg)]`
-      "
+      class="absolute inset-0 size-full overflow-hidden z-10 bg-clip-text flex items-center justify-center word-wrapper bg-[url(/mountain.jpg)]"
     >
       <p class="main-word">N</p>
       <div class="absolute top-40 w-full px-20">
@@ -81,5 +78,8 @@ onMounted(() => {
   color: transparent;
   -webkit-text-stroke: 0px #fff;
   user-select: none;
+
+  transform: translateZ(0);
+  will-change: transform;
 }
 </style>

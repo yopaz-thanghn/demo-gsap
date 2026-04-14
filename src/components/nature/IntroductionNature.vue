@@ -40,7 +40,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="h-screen w-full pt-16">
+  <section class="h-screen w-full">
     <div
       class="size-full bg-[url(/jungle-tree-dark.jpg)] bg-center bg-cover bg-no-repeat grid grid-cols-3 text-white px-20 py-10 text-justify"
     >

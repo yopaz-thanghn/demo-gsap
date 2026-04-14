@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { imgsCircle } from '@/constants/imge-circle'
-import { Draggable, MotionPathPlugin, InertiaPlugin } from 'gsap/all'
+import { Draggable } from 'gsap/all'
 import { gsap } from 'gsap'
 import { onMounted } from 'vue'
-
-gsap.registerPlugin(MotionPathPlugin, Draggable, InertiaPlugin)
 
 const selectImg = () => {
   const indicator = document.querySelector<HTMLDivElement>('.indicator')
@@ -32,7 +30,7 @@ const selectImg = () => {
 
 onMounted(() => {
   const images = gsap.utils.toArray('.image')
-  const container = document.querySelector('.container')
+  const circleContainer = document.querySelector<HTMLDivElement>('.circle-container')
   gsap.set(images, {
     motionPath: {
       path: '#circle',
@@ -42,7 +40,7 @@ onMounted(() => {
       autoRotate: true,
     },
   })
-  Draggable.create(container, {
+  Draggable.create(circleContainer, {
     type: 'rotation',
     inertia: true,
     onThrowComplete: () => {
@@ -50,23 +48,23 @@ onMounted(() => {
     },
   })
 
-  const rotateTo = gsap.quickTo(container, 'rotation', {
-    duration: 0.5,
-    ease: 'power2.out',
-  })
+  // const rotateTo = gsap.quickTo(circleContainer, 'rotation', {
+  //   duration: 0.5,
+  //   ease: 'power2.out',
+  // })
 
-  document.addEventListener('wheel', (event) => {
-    const sensitivity = 2
-    const rotationDistance = Number(gsap.getProperty(container, 'rotation'))
-    rotateTo(rotationDistance + event.deltaY * sensitivity)
-  })
+  // document.addEventListener('wheel', (event) => {
+  //   const sensitivity = 2
+  //   const rotationDistance = Number(gsap.getProperty(circleContainer, 'rotation'))
+  //   rotateTo(rotationDistance + event.deltaY * sensitivity)
+  // })
 })
 </script>
 
 <template>
   <section class="h-screen pt-16 w-full flex items-center justify-center overflow-hidden relative">
     <div class="relative z-10">
-      <div class="container relative">
+      <div class="circle-container relative">
         <svg viewBox="0 0 400 400">
           <path
             stroke-width="1"
@@ -97,7 +95,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.container {
+.circle-container {
   width: 500px;
   height: 500px;
 }

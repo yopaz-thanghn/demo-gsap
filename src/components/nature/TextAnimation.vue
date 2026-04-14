@@ -1,32 +1,12 @@
-<script setup lang="ts">
-import { gsap } from 'gsap'
-import { MotionPathPlugin } from 'gsap/all'
-import { onMounted } from 'vue'
-gsap.registerPlugin(MotionPathPlugin)
-
-onMounted(() => {
-  gsap.set('.box', {
-    xPercent: -50,
-    yPercent: -50,
-    transformOrigin: '50% 50%',
-  })
-  gsap.to('.box', {
-    motionPath: {
-      path: '#path',
-    },
-    transformOrigin: '50% 50%',
-    duration: 5,
-  })
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <section class="h-screen pt-16">
     <div class="size-full bg-white relative">
-      <!-- <div class="relative">
+      <div class="relative">
         <h3 class="main-text">Water</h3>
         <h3 class="main-text">Water</h3>
-      </div> -->
+      </div>
     </div>
   </section>
 </template>
