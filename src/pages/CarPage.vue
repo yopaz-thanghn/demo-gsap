@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ImageGallery from '@/components/car/ImageGallery.vue'
+import CarGallery from '@/components/car/CarGallery.vue'
 import ImageSlider from '@/components/car/ImageSlider.vue'
 import { gsap } from 'gsap'
 import {
@@ -42,7 +42,7 @@ onMounted(() => {
   <div id="animation-container">
     <div id="animation-content">
       <ImageSlider />
-      <ImageGallery />
+      <CarGallery />
       <NewestCar />
       <CarTimeline />
     </div>

@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 export const useCalculateDragDistance = () => {
   const pointDistance = ref<number>(0)
@@ -18,7 +18,6 @@ export const useCalculateDragDistance = () => {
 
     window.addEventListener('mousemove', (e) => {
       if (!isMouseDown.value) return
-
       const dx = e.clientX - startX
       const dy = e.clientY - startY
       xDistance.value = dx

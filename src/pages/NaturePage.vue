@@ -15,6 +15,7 @@ import {
   Draggable,
 } from 'gsap/all'
 import { ref, watchEffect } from 'vue'
+import Box3D from '@/components/nature/Box3D.vue'
 
 gsap.registerPlugin(Draggable, ScrollTrigger, SplitText, Flip, MotionPathPlugin, InertiaPlugin)
 
@@ -46,8 +47,9 @@ watchEffect((onInvalidate) => {
 <template>
   <VueLenis root ref="lenisRef" :options="{ autoRaf: false }" />
   <!-- <TextAnimation /> -->
-  <IntroductionNature />
+  <!-- <IntroductionNature />
   <AwesomeBackground />
   <ImageCircle />
-  <LuckyWheel />
+  <LuckyWheel /> -->
+  <Box3D />
 </template>
