@@ -191,5 +191,6 @@ onMounted(() => {
   object-fit: cover;
   border-radius: 10px;
   -webkit-user-drag: none;
+  -webkit-box-reflect: below 10px linear-gradient(transparent 60%, rgba(255, 255, 255, 0.8));
 }
 </style>

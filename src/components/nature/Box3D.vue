@@ -13,7 +13,7 @@ const { init: selectObject, xDistance, yDistance } = useCalculateDragDistance()
 const boxRef = useTemplateRef<HTMLDivElement>('box')
 const isMouseOut = ref<boolean>(false)
 const isTouchSideFace = ref<boolean>(false)
-// let tween: gsap.core.Tween
+const sensivity = 0.2
 
 const init = () => {
   if (!boxRef.value) return
@@ -23,17 +23,16 @@ const init = () => {
 watch([xDistance, yDistance], ([x, y]) => {
   const box = boxRef.value
   if (!box || isMouseOut.value) return
-  // const rotateY = Number(gsap.getProperty(box, 'rotateY')) % 360
-  // const rotateZ = Number(gsap.getProperty(box, 'rotateZ'))
-  // const rotateX = Number(gsap.getProperty(box, 'rotateX'))
-  // let isBackFace = false
-  // if ((rotateY <= -100 && rotateY >= -240) || (rotateY >= 100 && rotateY <= 250)) {
-  //   isBackFace = true
-  // }
+  const rotateY = Number(gsap.getProperty(box, 'rotateY')) % 360
 
+  let isBackFace = false
+  if ((rotateY <= -100 && rotateY >= -240) || (rotateY >= 100 && rotateY <= 250)) {
+    isBackFace = true
+  }
+  const directionValue = isBackFace ? 1 : -1
   const tween = gsap.to(box, {
-    rotateX: `+=${-y * 0.2}`,
-    rotateY: `+=${x * 0.2}`,
+    rotateX: `+=${y * sensivity * directionValue}`,
+    rotateY: `+=${x * sensivity}`,
     inertia: {
       rotateY: {
         velocity: 50,

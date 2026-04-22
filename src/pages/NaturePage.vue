@@ -47,9 +47,9 @@ watchEffect((onInvalidate) => {
 <template>
   <VueLenis root ref="lenisRef" :options="{ autoRaf: false }" />
   <!-- <TextAnimation /> -->
-  <!-- <IntroductionNature />
+  <IntroductionNature />
   <AwesomeBackground />
   <ImageCircle />
-  <LuckyWheel /> -->
+  <LuckyWheel />
   <Box3D />
 </template>
